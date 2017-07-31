@@ -1,0 +1,8 @@
+<div class="dropdown">
+  <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <ng-content></ng-content>
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <span *ngFor="let order of orders" class="dropdown-item" (click)="selectOrder(order)">{{order.orderNumber}}</span>
+  </div>
+</div>
