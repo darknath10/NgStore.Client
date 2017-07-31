@@ -1,0 +1,24 @@
+<div class="container">
+  <h1 class="text-center">Customers Order Details</h1>
+  <div class="d-inline-block my-3">
+    <customers-dropdown [customers]="customers" (customerSelected)="setCurrentCustomer($event)">
+      {{currentCustomer ? currentCustomer.firstName + ' ' + currentCustomer.lastName : 'Select a Customer'}}
+    </customers-dropdown>
+  </div>
+  <div *ngIf="currentCustomer" class="d-inline-block my-3">
+    <customer-orders-dropdown [customerId]="currentCustomer.id" (orderSelected)="setCurrentOrder($event)">
+      {{currentOrder?.orderNumber || 'Select an Order'}}
+    </customer-orders-dropdown>
+  </div>
+  <div *ngIf="currentOrder" class="card">
+    <div class="card-header">
+      <h3><i class="fa fa-user-circle"></i> {{currentCustomer.firstName + ' ' + currentCustomer.lastName}}</h3>
+      <div class="d-flex justify-content-start">
+        <b title="Order Date" class="mr-3"><i class="fa fa-calendar"></i> {{currentOrder.orderDate | date:'shortDate'}}</b>
+        <b title="Order Number"><i class="fa fa-hashtag"></i> {{currentOrder.orderNumber}}</b>
+        <b title="Total Amount" class="ml-auto"><i class="fa fa-credit-card"></i> {{currentOrder.totalAmount | currency:'USD':true:'1.2-2'}}</b>
+      </div>
+    </div>
+    <order-items-table [orderId]="currentOrder.id"></order-items-table>
+  </div>
+</div>
