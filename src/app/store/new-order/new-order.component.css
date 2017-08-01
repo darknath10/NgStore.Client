@@ -1,0 +1,11 @@
+.trash, .addProd {
+    cursor: pointer;
+}
+
+.trash :hover {
+    color: #e00;
+}
+
+.addProd :hover {
+    color: #61cc6e;
+}

@@ -1,0 +1,46 @@
+<div class="container">
+  <h1 class="text-center display-3">New Order</h1>
+  <form (ngSubmit)="submitForm()" [formGroup]="newOrderForm" novalidate>
+    <div class="form-group" [ngClass]="{'has-danger':newOrderForm.get('customerId').touched && newOrderForm.get('customerId').invalid}">
+      <label for="customerId">Customer</label>
+      <select class="form-control" id="customerId" formControlName="customerId">
+        <option *ngFor="let customer of customers" [value]="customer.id">{{customer.firstName + ' ' + customer.lastName}}</option>
+      </select>
+      <em *ngIf="newOrderForm.get('customerId').touched && newOrderForm.get('customerId').invalid" class="form-control-feedback">Select Customer Required</em>
+    </div>
+    <div formArrayName="orderItems" *ngFor="let orderItem of orderItems.controls; let i=index">
+      <div [formGroupName]="i" class="d-flex">
+        <div class="form-group" class="mr-3" [ngClass]="{'has-danger': (orderItems.at(i).get('productId').touched && orderItems.at(i).get('productId').invalid) || newOrderForm.errors}">
+          <label attr.for="{{'productId' + i}}">Product</label>
+          <select class="form-control" id="{{'productId' + i}}" formControlName="productId">
+            <option *ngFor="let product of products" [value]="product.id">{{product.productName}} - {{product.unitPrice | currency:'USD':true:'1.2-2'}}</option>
+          </select>
+          <em *ngIf="newOrderForm.errors" class="form-control-feedback">You can choose a product just once.</em>
+          <em *ngIf="orderItems.at(i).get('productId').touched && orderItems.at(i).get('productId').invalid" class="form-control-feedback">Select Product Required</em>
+        </div>
+        <div class="form-group mr-3" [ngClass]="{'has-danger': orderItems.at(i).get('quantity').dirty && orderItems.at(i).get('quantity').invalid}">
+          <label attr.for="{{'quantity' + i}}">Quantity</label>
+          <input type="number" class="form-control" id="{{'quantity' + i}}" formControlName="quantity" />
+          <em *ngIf="orderItems.at(i).get('quantity').dirty && orderItems.at(i).get('quantity').invalid" class="form-control-feedback">You must choose at least 1</em>
+        </div>
+        <span class="trash align-self-center mt-3 mr-3" *ngIf="orderItems.length > 1" (click)="removeProduct(i)"><i class="fa fa-trash-o fa-2x"></i></span>
+        <span class="addProd align-self-center mt-3" *ngIf="i === orderItems.length - 1" [hidden]="!newOrderForm.get('orderItems').valid || newOrderForm.errors"
+          (click)="addOrderItem()"><i class="fa fa-cart-plus fa-2x"></i></span>
+      </div>
+    </div>
+    <div class="form-check">
+      <label for="discount" class="form-check-label">
+        <input type="checkbox" class="form-check-input" id="discount" formControlName="discount"> 10% Off
+      </label>
+    </div>
+    <div class="form-group d-flex justify-content-start" style="max-height:38px">
+      <div class="card" *ngIf="tempTotalAmount">
+        <div class="card-header">
+          <h6>Total Amount: {{discountFlag ? (tempTotalAmount * 0.9 | currency:'USD':true:'1.2-2') : tempTotalAmount | currency:'USD':true:'1.2-2'}}</h6>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-outline-success mr-3 ml-auto" [disabled]="newOrderForm.pristine || newOrderForm.invalid"><i class="fa fa-paper-plane-o"></i> Submit</button>
+      <button type="button" class="btn btn-outline-danger" routerLink="/welcome"><i class="fa fa-undo"></i> Cancel</button>
+    </div>
+  </form>
+</div>
