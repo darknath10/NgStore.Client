@@ -3,6 +3,6 @@
     <ng-content></ng-content>
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <span *ngFor="let order of orders" class="dropdown-item" (click)="selectOrder(order)">{{order.orderNumber}}</span>
+    <span *ngFor="let order of orders" class="dropdown-item" (click)="selectOrder(order)">#{{order.orderNumber}} - {{order.orderDate | date:'M/d/yy'}}</span>
   </div>
 </div>
