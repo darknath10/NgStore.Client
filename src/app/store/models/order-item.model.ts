@@ -4,5 +4,6 @@ export interface IOrderItem {
     id: number,
     unitPrice?: number,
     quantity: number,
-    product: IProduct
+    product: IProduct,
+    productId?: any
 }
