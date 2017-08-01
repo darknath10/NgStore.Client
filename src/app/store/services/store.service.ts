@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { FormGroup } from '@angular/forms';
 
 import { ICustomer } from '../models/customer.model';
 import { IOrder } from '../models/order.model';
@@ -33,5 +34,13 @@ export class StoreService {
     getProducts(): Observable<IProduct[]> {
         return this.http.get(`${this.baseUrl}/products`)
                         .map((res: Response) => <IProduct[]>res.json());
+    }
+
+    newOrder(orderForm: FormGroup): Observable<IOrder> {
+        let headers = new Headers({'Content-Type':'application/json'});
+        let options = new RequestOptions({headers: headers});
+
+        return this.http.post(`${this.baseUrl}/orders/new`, JSON.stringify(orderForm.value), options)
+                        .map((res: Response) => <IOrder>res.json());
     }
 }
