@@ -7,6 +7,8 @@ import { StoreRoutingModule } from './store-routing.module';
 import { StoreService } from './services/store.service';
 import { CustomerListResolver } from './services/customer-list-resolver.service';
 import { ProductListResolver } from './services/product-list-resolver.service';
+import { AuthGuard } from '../user/services/auth-guard.service';
+import { NewOrderGuard } from './/services/new-order-guard.service';
 
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { CustomersDropdownComponent } from './customers-dropdown/customers-dropdown.component';
@@ -30,7 +32,9 @@ import { NewOrderComponent } from './new-order/new-order.component';
   providers: [
     StoreService,
     CustomerListResolver,
-    ProductListResolver
+    ProductListResolver,
+    AuthGuard,
+    NewOrderGuard
   ]
 })
 export class StoreModule { }
