@@ -40,6 +40,15 @@ export class NewOrderComponent implements OnInit {
       this.customers = data['customers'];
       this.products = data['products'];
     });
+
+    this.customers = this.customers.sort((a,b) => {
+      return a.lastName < b.lastName ? -1 : a.lastName > b.lastName ? 1 : 0;
+    });
+
+    this.products = this.products.sort((a,b) => {
+      return a.productName < b.productName ? -1 : a.productName > b.productName ? 1 : 0;
+    });
+
     this.newOrderForm = this.fb.group({
       customerId: ['', Validators.required],
       orderItems: this.fb.array([this.buildOrderItemFg()]),
