@@ -17,7 +17,10 @@ export class OrderDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.data.subscribe(data => this.customers = data['customers']); 
+    this.route.data.subscribe(data => this.customers = data['customers']);
+    this.customers = this.customers.sort((a,b) => {
+      return a.lastName < b.lastName ? -1 : a.lastName > b.lastName ? 1 : 0;
+    });
   }
 
   setCurrentCustomer(cust: ICustomer) {
