@@ -1,14 +1,16 @@
 <div class="container">
-  <h1 class="text-center">Customers Order Details</h1>
-  <div class="d-inline-block my-3">
-    <customers-dropdown [customers]="customers" (customerSelected)="setCurrentCustomer($event)">
-      {{currentCustomer ? currentCustomer.firstName + ' ' + currentCustomer.lastName : 'Select a Customer'}}
-    </customers-dropdown>
-  </div>
-  <div *ngIf="currentCustomer" class="d-inline-block my-3">
-    <customer-orders-dropdown [customerId]="currentCustomer.id" (orderSelected)="setCurrentOrder($event)">
-      {{currentOrder?.orderNumber || 'Select an Order'}}
-    </customer-orders-dropdown>
+  <div class="text-center">
+    <h1 class="display-3">Customers Order Details</h1>
+    <div class="d-inline-block my-3">
+      <customers-dropdown [customers]="customers" (customerSelected)="setCurrentCustomer($event)">
+        {{currentCustomer ? currentCustomer.firstName + ' ' + currentCustomer.lastName : 'Select a Customer'}}
+      </customers-dropdown>
+    </div>
+    <div *ngIf="currentCustomer" class="d-inline-block my-3">
+      <customer-orders-dropdown [customerId]="currentCustomer.id" (orderSelected)="setCurrentOrder($event)">
+        {{currentOrder?.orderNumber || 'Select an Order'}}
+      </customer-orders-dropdown>
+    </div>
   </div>
   <div *ngIf="currentOrder" class="card">
     <div class="card-header">
