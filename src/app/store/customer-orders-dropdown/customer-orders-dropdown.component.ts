@@ -17,7 +17,9 @@ export class CustomerOrdersDropdownComponent {
   constructor(private store: StoreService) {}
 
   ngOnChanges() {
-    this.store.getCustomerOrders(this.customerId).subscribe(data => this.orders = data);
+    this.store.getCustomerOrders(this.customerId).subscribe(data => this.orders = data.sort((a,b) => {
+      return a.orderDate > b.orderDate ? -1 : a.orderDate < b.orderDate ? 1 : 0;
+    }));
   }
 
   selectOrder(order: IOrder) {
