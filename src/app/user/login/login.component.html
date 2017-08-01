@@ -1,0 +1,16 @@
+<div class="container">
+  <h1 class="text-center display-3"><i class="fa fa-sign-in"></i> Login</h1>
+  <form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm); loginForm.reset()">
+    <div class="form-group" [ngClass]="{'has-danger':username.dirty && username.invalid}">
+      <label for="userName">Username/Email</label>
+      <input type="text" class="form-control" id="userName" name="userNameEmail" ngModel required #username="ngModel"/>
+      <em *ngIf="username.dirty && username.invalid" class="form-control-feedback">Username or Email Required</em>
+    </div>
+    <div class="form-group" [ngClass]="{'has-danger': pwd.dirty && pwd.invalid}">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" name="password" ngModel required #pwd="ngModel"/>
+      <em *ngIf="pwd.dirty && pwd.invalid" class="form-control-feedback">Password Required</em>
+    </div>
+    <button type="submit" class="btn btn-outline-primary" [disabled]="loginForm.invalid">Login</button>
+  </form>
+</div>
