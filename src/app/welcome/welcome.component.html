@@ -1,0 +1,44 @@
+<div class="container-fluid p-0">
+  <div class="card">
+    <div class="card-header">
+      <h1 class="text-center display-3">NG Store</h1>
+    </div>
+    <div class="container card-block my-5">
+      <h4 class="card-title text-center display-4">Main Features:</h4>
+      <h5 class="card-title">Authentication</h5>
+      <p class="card-text">
+        The user <b>must</b> be logged in in order to navigate threw the app. You can use <kbd>elikopter/P@ssw0rd</kbd> credentials to do so.
+      </p>
+      <h5 class="card-title">Orders History</h5>
+      <p class="card-text">
+        First, choose a customer from the customers dropdown list. Then an other dropdown appears with the order list of the chosen customer.<br/>
+        Select an order, and a table pops up with the order's details.
+      </p>
+      <h5 class="card-title">New Order</h5>
+      <p class="card-text">
+        There is a form to fill in.<br/>
+        As before, choose a customer from the dropdown list. Then choose a product and its quantity which <em>must be at least one</em>.<br/>
+      </p>
+      <p class="card-text">
+        An add button appears. Click it if you want to add an other product to the list.<br/>
+        Notice that <strong>the same product cannot be chosen twice or more</strong>.<br/>
+        If there are at least two products in the order list, you can remove each of them by clicking on the trash button.
+      </p>
+      <p class="card-text">        
+        Finally, there is a checkbox that set on true will give the customer 10% discount.<br/>
+      </p>
+      <p class="card-text">
+        Once the form is valid, the user can submit it after having confirmed.<br/>
+        A pop up message appears (success/error) accordingly to the server's response.        
+      </p>
+      <p class="card-text">
+        Finally, the user is redirected to the "orders" page.
+      </p>
+    </div>
+    <div class="card-footer text-center">
+      <h3 class="card-title">So, what do you want to try first?</h3>
+      <button class="btn btn-outline-primary mr-3" routerLink="/orders">Orders</button>
+      <button class="btn btn-outline-primary" routerLink="/neworder">New Order</button>
+    </div>
+  </div>
+</div>
